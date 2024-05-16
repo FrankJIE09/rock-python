@@ -1,0 +1,11 @@
+*.pyc
+*.vscode
+*.DS_Store
+*.idea
+.idea
+tensorboard_logs/
+*saves/
+data
+*.egg-info
+build/
+dist/
