@@ -1,0 +1,4 @@
+pygame
+pyads
+yaml
+pyinstaller
