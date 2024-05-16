@@ -28,7 +28,7 @@ PLC_port = 851
 try:
     plc = pyads.Connection(AmsnetID, PLC_port)
 except BaseException:
-    RuntimeError("未连接PLC")
+    RuntimeError("Not connect to PLC.")
 plc.open()
 
 # init pygame
@@ -59,7 +59,7 @@ while done == False:
     # Get count of joysticks
     joystick_count = pygame.joystick.get_count()
     if joystick_count == 0:
-        print("未找到摇杆")
+        print("Not find rock.")
     # For each joystick:
     for i in range(joystick_count):
         joystick = pygame.joystick.Joystick(i)
