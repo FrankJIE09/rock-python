@@ -25,7 +25,10 @@ AmsnetID = config.get("AmsnetID")
 # default ADS port
 PLC_port = 851
 # open Port, start plc
-plc = pyads.Connection(AmsnetID, PLC_port)
+try:
+    plc = pyads.Connection(AmsnetID, PLC_port)
+except BaseException:
+    RuntimeError("未连接PLC")
 plc.open()
 
 # init pygame
@@ -55,7 +58,8 @@ while done == False:
 
     # Get count of joysticks
     joystick_count = pygame.joystick.get_count()
-
+    if joystick_count == 0:
+        print("未找到摇杆")
     # For each joystick:
     for i in range(joystick_count):
         joystick = pygame.joystick.Joystick(i)
@@ -76,7 +80,7 @@ while done == False:
         # for i in range(3):
         #     print(joystick.get_axis(i)*128)
         for i in range(axes):
-            axis = joystick.get_axis(i)*128
+            axis = joystick.get_axis(i) * 128
             print(axis)
 
             # send axis value to Twincat PLC project
