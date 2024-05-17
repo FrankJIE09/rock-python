@@ -89,10 +89,10 @@ while done == False:
                 print("R_x", axis)
                 plc.write_by_name("MAIN.stHSHandMaster.valueX", int(axis), pyads.PLCTYPE_INT)
             if i == 1:
-                print("R_y", axis)
+                print("R_y                 ", axis)
                 plc.write_by_name("MAIN.stHSHandMaster.valueY", int(axis), pyads.PLCTYPE_INT)
             if i == 2:
-                print("R_z", axis)
+                print("R_z                                       ", axis)
                 plc.write_by_name("MAIN.stHSHandMaster.valueZ", int(axis), pyads.PLCTYPE_INT)
 
         # buttons = joystick.get_numbuttons()
