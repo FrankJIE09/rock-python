@@ -72,25 +72,21 @@ while done == False:
         # Usually axis run in pairs, up/down for one, and left/right for
         # the other.
         axes = joystick.get_numaxes()
-        for i in range(axes):
-            axis = joystick.get_axis(i) * 128
-            # send axis value to Twincat PLC project
-            # print axis value
-            if i == 0:
-                print("R_x", int(axis))
-                plc.write_by_name("MAIN.stHSHandMaster.valueX", int(axis), pyads.PLCTYPE_INT)
-            if i == 1:
-                print("R_y                 ", int(axis))
-                plc.write_by_name("MAIN.stHSHandMaster.valueY", int(axis), pyads.PLCTYPE_INT)
-            if i == 2:
-                print("R_z                                       ",int(axis))
-                plc.write_by_name("MAIN.stHSHandMaster.valueZ", int(axis), pyads.PLCTYPE_INT)
+        axis_x = joystick.get_axis(0) * 128
+        axis_y = joystick.get_axis(1) * 128
+        axis_z = joystick.get_axis(2) * 128
+        plc.write_by_name("MAIN.stHSHandMaster.valueX", int(axis_x), pyads.PLCTYPE_INT)
+        plc.write_by_name("MAIN.stHSHandMaster.valueY", int(axis_y), pyads.PLCTYPE_INT)
+        plc.write_by_name("MAIN.stHSHandMaster.valueZ", int(axis_z), pyads.PLCTYPE_INT)
 
-        # buttons = joystick.get_numbuttons()
-        #
-        # for i in range(buttons):
-        #     button = joystick.get_button(i)
-    clock.tick(20)
+        # 构建要打印的内容
+        output_x = f"R_x: {int(axis_x)}"
+        output_y = f"R_y: {int(axis_y)}"
+        output_z = f"R_z: {int(axis_z)}"
+
+        # 清除之前的内容并打印更新后的内容
+        print('\r' + ' ' * 50 + '\r' + output_x + '    ' + output_y + '    ' + output_z, end='', flush=True)
+    clock.tick(50)
 
 # Close the window and quit.
 # If you forget this line, the program will 'hang'
