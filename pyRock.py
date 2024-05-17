@@ -61,8 +61,8 @@ while done == False:
     if joystick_count == 0:
         print("Not find rock.")
     # For each joystick:
-    for i in range(joystick_count):
-        joystick = pygame.joystick.Joystick(i)
+    for count in range(joystick_count):
+        joystick = pygame.joystick.Joystick(count)
         joystick.init()
 
         # Get the name from the OS for the controller/joystick
