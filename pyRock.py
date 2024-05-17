@@ -65,9 +65,6 @@ while done == False:
         joystick = pygame.joystick.Joystick(i)
         joystick.init()
 
-        # textPrint.print(screen, "Joystick {}".format(i) )
-        # textPrint.indent()
-
         # Get the name from the OS for the controller/joystick
         # name = joystick.get_name()
         # textPrint.print(screen, "Joystick name: {}".format(name) )
@@ -75,24 +72,18 @@ while done == False:
         # Usually axis run in pairs, up/down for one, and left/right for
         # the other.
         axes = joystick.get_numaxes()
-        # textPrint.print(screen, "Number of axes: {}".format(axes) )
-        # textPrint.indent()
-        # for i in range(3):
-        #     print(joystick.get_axis(i)*128)
         for i in range(axes):
             axis = joystick.get_axis(i) * 128
-            print(axis)
-
             # send axis value to Twincat PLC project
             # print axis value
             if i == 0:
-                print("R_x", axis)
+                print("R_x", int(axis))
                 plc.write_by_name("MAIN.stHSHandMaster.valueX", int(axis), pyads.PLCTYPE_INT)
             if i == 1:
-                print("R_y                 ", axis)
+                print("R_y                 ", int(axis))
                 plc.write_by_name("MAIN.stHSHandMaster.valueY", int(axis), pyads.PLCTYPE_INT)
             if i == 2:
-                print("R_z                                       ", axis)
+                print("R_z                                       ",int(axis))
                 plc.write_by_name("MAIN.stHSHandMaster.valueZ", int(axis), pyads.PLCTYPE_INT)
 
         # buttons = joystick.get_numbuttons()
